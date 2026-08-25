@@ -1,0 +1,17 @@
+pluginManagement {
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        gradlePluginPortal()
+    }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version "${foojay_resolver_version}"
+}
+
+rootProject.name = 'snapyaw'
+
+include 'common', 'fabric', 'neoforge'
