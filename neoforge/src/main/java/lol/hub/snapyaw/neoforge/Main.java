@@ -28,11 +28,10 @@ public class Main {
         event.register(CORE.toggleKey);
     }
 
-    // PlayerTickEvent.Post fires once per Player entity tick, which on an
-    // integrated server means once on the client/render thread (the local
-    // player) AND once on the separate server thread (the server-side
-    // player). Use the client-only tick event instead: fires exactly once
-    // per client tick, same as Fabric's ClientTickEvents.END_CLIENT_TICK.
+    // PlayerTickEvent.Post fires once per Player entity tick. On an integrated server that's
+    // twice per frame: once for the local player on the render thread, once for the server-side
+    // player on the server thread. Use ClientTickEvent.Post instead -- fires exactly once per
+    // client tick, same as Fabric's ClientTickEvents.END_CLIENT_TICK.
     private static void onClientTick(ClientTickEvent.Post event) {
         CORE.onTick(Minecraft.getInstance());
     }

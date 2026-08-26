@@ -34,7 +34,7 @@ class YawSnapperTest {
 
     @Test
     void handlesWraparoundAcrossZero() {
-        // -2 degrees is 2 degrees short of the 0/360 cardinal.
+        // -2 is 2 degrees short of the 0/360 cardinal.
         float result = YawSnapper.apply(-2f, TICK_SECONDS);
 
         assertEquals(-2f + (5f / 3f) * TICK_SECONDS, result, 1e-4f);
@@ -42,7 +42,7 @@ class YawSnapperTest {
 
     @Test
     void handlesWraparoundAboveThreeSixty() {
-        // 362 degrees is 2 degrees past the 360/0 cardinal.
+        // 362 is 2 degrees past the 360/0 cardinal.
         float result = YawSnapper.apply(362f, TICK_SECONDS);
 
         assertEquals(362f - (5f / 3f) * TICK_SECONDS, result, 1e-4f);
@@ -50,16 +50,14 @@ class YawSnapperTest {
 
     @Test
     void snapsExactlyToTargetInsteadOfOvershootingWhenStepWouldPassIt() {
-        // Only 0.01 degrees left to travel -- a full tick's worth of
-        // movement would overshoot past the cardinal without clamping.
+        // Only 0.01 degrees left to travel. A full tick's step would overshoot the cardinal without clamping.
         float result = YawSnapper.apply(89.99f, TICK_SECONDS);
 
         assertEquals(90f, result, 1e-4f);
     }
 
-    // Pins down the 3-second worst-case contract: entering the trigger
-    // range at exactly its edge (5 degrees off) reaches the cardinal in
-    // exactly 3 seconds of accumulated ticks, not longer.
+    // Entering the trigger range at its edge (5 degrees off) is the worst case.
+    // Pins it at exactly 3 seconds of accumulated ticks, not longer.
     @Test
     void reachesTargetInExactlyThreeSecondsFromTheEdgeOfTheRange() {
         float yaw = 85f;

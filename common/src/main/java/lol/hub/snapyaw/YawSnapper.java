@@ -9,11 +9,9 @@ public final class YawSnapper {
     private YawSnapper() {
     }
 
-    // Called once per tick with the elapsed time since the last call. Pulls
-    // yaw toward the nearest cardinal direction at a constant angular speed
-    // once within TRIGGER_RANGE_DEGREES of it, so the worst case (entering
-    // the range at exactly the edge) takes exactly SNAP_DURATION_SECONDS to
-    // reach the target, and closer entries take proportionally less.
+    // Call once per tick with the elapsed time since the last call.
+    // Pulls yaw toward the nearest cardinal at a constant angular speed once within TRIGGER_RANGE_DEGREES.
+    // Worst case is entering at the edge of the range: reaches the target in exactly SNAP_DURATION_SECONDS. Closer entries take less time.
     public static float apply(float yaw, float deltaSeconds) {
         float distance = distanceToNearestCardinal(yaw);
         if (Math.abs(distance) > TRIGGER_RANGE_DEGREES) return yaw;
@@ -23,9 +21,8 @@ public final class YawSnapper {
         return yaw + step;
     }
 
-    // Signed shortest angle from yaw to the nearest multiple of 90 degrees,
-    // magnitude at most 45 degrees. Positive means the nearest cardinal is
-    // ahead of yaw (adding the result to yaw reaches it).
+    // Signed shortest angle from yaw to the nearest multiple of 90 degrees, magnitude at most 45.
+    // Positive means the nearest cardinal is ahead of yaw: adding the result to yaw reaches it.
     static float distanceToNearestCardinal(float yaw) {
         float remainder = yaw % 90f;
         if (remainder < 0) remainder += 90f;
