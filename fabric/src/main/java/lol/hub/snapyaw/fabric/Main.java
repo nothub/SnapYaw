@@ -15,6 +15,7 @@ public class Main implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         KeyMappingHelper.registerKeyMapping(CORE.toggleKey);
+        KeyMappingHelper.registerKeyMapping(CORE.pressKey);
 
         ClientTickEvents.END_CLIENT_TICK.register(CORE::onTick);
     }

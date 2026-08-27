@@ -26,6 +26,7 @@ public class Main {
     private static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
         event.registerCategory(CATEGORY);
         event.register(CORE.toggleKey);
+        event.register(CORE.pressKey);
     }
 
     // PlayerTickEvent.Post fires once per Player entity tick. On an integrated server that's

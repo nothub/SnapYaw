@@ -68,4 +68,37 @@ class YawSnapperTest {
         assertEquals(90f, yaw, 1e-3f);
     }
 
+    @Test
+    void pressSnapMovesTowardNearestCardinalRegardlessOfDistance() {
+        // 84 degrees is outside apply()'s trigger range, but applyPressSnap() has none.
+        float result = YawSnapper.applyPressSnap(84f, TICK_SECONDS);
+
+        assertEquals(84f + (45f / 1.2f) * TICK_SECONDS, result, 1e-4f);
+    }
+
+    @Test
+    void pressSnapSnapsExactlyToTargetInsteadOfOvershooting() {
+        float result = YawSnapper.applyPressSnap(89.99f, TICK_SECONDS);
+
+        assertEquals(90f, result, 1e-4f);
+    }
+
+    @Test
+    void pressSnapReachesTargetInExactlyOnePointTwoSecondsFromTheWorstCaseDistance() {
+        // 45 degrees off is the farthest any yaw can be from a cardinal; 45.1 breaks the exact tie
+        // in favor of 90 so the nearest cardinal is unambiguous, while still exercising the worst case.
+        float yaw = 45.1f;
+        for (int tick = 0; tick < 24; tick++) {
+            yaw = YawSnapper.applyPressSnap(yaw, TICK_SECONDS);
+        }
+
+        assertEquals(90f, yaw, 1e-3f);
+    }
+
+    @Test
+    void isAtCardinalTrueOnlyExactlyOnCardinal() {
+        assertEquals(true, YawSnapper.isAtCardinal(90f));
+        assertEquals(false, YawSnapper.isAtCardinal(89.99f));
+    }
+
 }

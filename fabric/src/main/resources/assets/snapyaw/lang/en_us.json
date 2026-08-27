@@ -1,4 +1,5 @@
 {
   "key.category.snapyaw.keys": "SnapYaw",
-  "key.snapyaw.toggle": "Toggle Yaw Snap"
+  "key.snapyaw.toggle": "Toggle Yaw Snap",
+  "key.snapyaw.press": "Press to Snap Yaw"
 }
