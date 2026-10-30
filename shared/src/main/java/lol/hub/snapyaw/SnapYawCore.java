@@ -1,8 +1,8 @@
 package lol.hub.snapyaw;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import org.lwjgl.glfw.GLFW;
 
 public final class SnapYawCore {
 
@@ -11,7 +11,7 @@ public final class SnapYawCore {
     private YawSnapper.PressSnap pressSnap;
 
     public SnapYawCore(KeyMapping.Category category) {
-        key = new KeyMapping("key.snapyaw.key", GLFW.GLFW_KEY_KP_2, category);
+        key = new KeyMapping("key.snapyaw.key", InputConstants.KEY_NUMPAD2, category);
     }
 
     public void onTick(Minecraft mc) {
