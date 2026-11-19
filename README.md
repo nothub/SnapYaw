@@ -4,3 +4,5 @@ Fabric & NeoForge mod. Stop falling off your bridges! Snap your yaw to the neare
 
 [Modrinth](https://modrinth.com/mod/snapyaw)  
 [GitHub](https://github.com/nothub/snapyaw/releases)
+
+---
